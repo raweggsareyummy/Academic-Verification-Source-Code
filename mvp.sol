@@ -34,7 +34,7 @@ contract AcademicVerification {
     }
 
     /// @notice Issue a credential to a student
-    /// @param student The Ethereum address of the student
+    /// @param student The address of the student
     /// @param degree The degree or certificate awarded
     function issueCredential(address student, string memory degree) public onlyUniversity {
         credentials[student] = Credential(degree, block.timestamp, true);
@@ -42,14 +42,14 @@ contract AcademicVerification {
     }
 
     /// @notice Revoke a credential (e.g., for fraud or error)
-    /// @param student The Ethereum address of the student
+    /// @param student The address of the student
     function revokeCredential(address student) public onlyUniversity {
         require(credentials[student].isValid, "Credential already revoked or not found.");
         credentials[student].isValid = false;
     }
 
     /// @notice Public function to verify if a student's credential is valid
-    /// @param student The Ethereum address of the student
+    /// @param student The address of the student
     /// @return degree The name of the degree
     /// @return dateIssued When the degree was issued
     /// @return isValid Whether the credential is currently valid
